@@ -2,9 +2,10 @@ import React from 'react';
 
 import MovieListItem from './MovieListItem';
 import MovieFooter from './MovieFooter';
-
+import { useSelector } from 'react-redux';
+import { store } from '..';
 const MovieList = (props) => {
-  const movies = [];
+  const movies = useSelector((store)=> store.movieState.movies);
 
   return (
     <div className="flex-1">
@@ -22,13 +23,13 @@ const MovieList = (props) => {
 
           <tbody className='text-sm'>
             {
-              movies.map(movie => <MovieListItem key={movie.id} movie={movie} />)
+             movies.map(movie => <MovieListItem key={movie.id} movie={movie} />)
             }
           </tbody>
         </table>
       </div>
 
-      <MovieFooter totalMovies={movies.length} />
+     { <MovieFooter totalMovies={movies.length} /> }
     </div>
   );
 }
